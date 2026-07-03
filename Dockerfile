@@ -10,7 +10,11 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
+# 1. Copiamos el archivo JAR ejecutable
 COPY --from=builder /app/target/*.jar app.jar
+
+# 2. COPIAMOS LA WALLET (Trae la carpeta física desde la etapa de compilación)
+COPY --from=builder /app/src/main/resources/wallet /app/wallet
 
 EXPOSE 8081
 
